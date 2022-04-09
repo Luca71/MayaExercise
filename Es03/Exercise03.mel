@@ -1,0 +1,19 @@
+/* Script 3) 
+	Write a script that based on selection will print how many objects / nodes the user
+	has selected. */
+
+// Count selected items
+ME_CountObjs();
+ME_CountNodes();
+
+proc ME_CountObjs()
+{
+    string $objs[] = `ls -sl`;
+    print ("Objs: " + size($objs) + "\n");
+}
+
+proc ME_CountNodes()
+{
+    string $nodes[] = `ls -sl -typ node`;
+    print ("Nodes: " + size($nodes) + "\n");
+}

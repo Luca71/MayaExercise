@@ -1,0 +1,27 @@
+/* Script 4) 
+	Make a copy of the script above and modify the copy so that it now prints
+	how many joints are selected, how many meshes are selected and how many transforms
+	are selected. */
+
+// Count selected items
+ME_CountJoints();
+ME_CountMeshes();
+ME_CountNodes();
+
+proc ME_CountJoints()
+{
+    string $joints[] = `ls -sl -typ joint `;
+    print ("Joints: " + size($joints) + "\n");
+}
+
+proc ME_CountMeshes()
+{
+    string $meshes[] = `ls -sl -typ mesh`;
+    print ("Meshes: " + size($meshes) + "\n");
+}
+
+proc ME_CountNodes()
+{
+    string $transforms[] = `ls -sl -typ transform`;
+    print ("Transforms: " + size($transforms) + "\n");
+}

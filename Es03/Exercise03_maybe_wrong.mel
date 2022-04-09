@@ -1,0 +1,36 @@
+// Count selected items
+CountObjs();
+CountShapes();
+CountNodes();
+
+// Print results
+print ("Objects: " + $objCounter + "\n");
+print ("Shapes: " + $shapeCounter + "\n");
+print ("Default nodes: " + $nodeCounter + "\n");
+
+proc CountObjs()
+{
+    global int $objCounter = 0;
+    string $objs[] = `ls -sl`;
+    for ($obj in $objs){
+        $objCounter = $objCounter + 1;
+    }
+}
+
+proc CountShapes()
+{
+    global int $shapeCounter = 0;
+    string $shapes[] = `ls -s`;
+    for ($shape in $shapes){
+        $shapeCounter = $shapeCounter + 1;
+    }
+}
+
+proc CountNodes()
+{
+    global int $nodeCounter = 0;
+    string $nodes[] = `ls -dn`;
+    for ($node in $nodes){
+        $nodeCounter = $nodeCounter + 1;
+    }
+}

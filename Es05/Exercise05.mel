@@ -1,0 +1,28 @@
+/* Script 5) 
+	Write a script with a UI that has a textField and a button, where the user
+	can enter their name and hitting the button will print a welcome message, addressing
+	the user by the name they entered. */
+
+string $window = "Window";
+
+if (`window -q -ex $window`)
+{
+    deleteUI $window;
+}
+
+// Create window
+window -t "Hello user" $window;
+window -e -h 150 -w 250 $window;
+    columnLayout -adj true -co "both" 10 -rs 6 -bgc 0.2 0.2 0.2;
+        text -h 10 -fn "boldLabelFont" -label "Please enter your name?";
+        string $name = `textField`;
+        button -l "Print name in console" -c "ME_PrintName($name)";
+    setParent..;
+showWindow;
+
+
+global proc ME_PrintName(string $field)
+{
+    string $text = `textField -q -text $field`;
+    print ("Welcome " + $text + "\n");
+}
