@@ -22,9 +22,9 @@ setAttr ($materials[2] + ".colorB") 1;
 // Create scene objs
 for ($i=0; $i < 3; $i=$i+1)
 {
-    polySphere -r 1 -name ("sphere" + $i);
-    move -r ($deltaX * $i) 0 0 ;
-    polyCube -name ("cube" + $i) -w 1 -h 1 -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0;
-    move -r ($deltaX * $i) $deltaY 0 ;
+    string $sphereName[] = `polySphere`;
+    move -r ($deltaX * $i) 0 0 $sphereName[0];
+    string $cubeName[] = `polyCube`;
+    move -r ($deltaX * $i) $deltaY 0 $cubeName[0];
     hyperShade -assign $materials[$i];
 }

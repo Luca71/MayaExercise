@@ -19,7 +19,7 @@ window -e -h 150 -w 250 $window;
         button -l "Print name in console" -c "ME_PrintName($name)";
     setParent..;
 showWindow;
-
+window -e -h 150 -w 250 $window;
 
 global proc ME_PrintName(string $field)
 {

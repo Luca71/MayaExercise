@@ -1,0 +1,40 @@
+/* Match the position of the first selected obj */
+global proc ME_matchPosition()
+{
+    string $sel[] = `ls -sl`;
+    vector $pos = `xform -q -ws -t $sel[0]`;
+    move -a -ws ($pos.x) ($pos.y) ($pos.z) $sel[1];
+}
+
+/* Last selected item match the avarage position of the other items */
+global proc ME_moveToAveragePos()
+{
+    string $sel[] = `ls -os -fl`;
+    if (size($sel) < 2)
+    {
+        error "Select at least 2 objs.";
+    }
+    string $target = $sel[size($sel) - 1];
+    stringArrayRemoveAtIndex( size($sel) - 1, $sel );
+    vector $finalPos = <<0, 0, 0>>;
+
+    for ($item in $sel)
+    {
+        vector $pos = `xform -q -ws -t $item`;
+        $finalPos += $pos;
+    }
+    $finalPos /= size($sel);
+    move -a -ws ($finalPos.x) ($finalPos.y) ($finalPos.z) $target;
+}
+
+/* Mirror an obj on X axis respect the 0,0,0 coords */
+global proc ME_mirrorObj()
+{
+    string $sel[] = `ls -sl`;
+    string $grpName = `group -em`;
+    parent $sel $grpName;
+
+    setAttr ($grpName + ".scaleX") -1;
+    ungroup $grpName;
+    select $sel;
+}

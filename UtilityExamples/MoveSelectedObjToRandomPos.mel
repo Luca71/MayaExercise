@@ -1,0 +1,36 @@
+/* Move a selected obj to a random position on x and z axis,ù
+    rotate on Y axis,
+    scale on Y axis. */
+
+
+global proc ME_randomDuplicateSelection(string $sel[], int $nrDuplicates, float $spacing)
+{
+    // Duplicte the selected obj
+    if (size($sel) > 1)
+    {
+        error "Multiple objs selected! Select only one obj.";
+    }
+
+    for ($i=0; $i < $nrDuplicates; $i++)
+    {
+        // Duplicate
+        string $newObjs[] = `duplicate -rr $sel`;
+        vector $newPos = `rand <<-$spacing, -$spacing, -$spacing>> <<$spacing, $spacing, $spacing>>`;
+        move -r ($newPos.x) 0 ($newPos.z) $newObjs;
+
+        // Rotation
+        float $newRotY = `rand <<-180, 180>>`;
+        rotate -a 0 $newRotY 0 $newObjs;
+
+        // Scale
+        float $newScaleY = `rand <<1, 10>>`;
+        scale -a 1 $newScaleY 1 $newObjs;
+        move -r 0 ($newScaleY * 0.5) 0 $newObjs;
+    }
+
+    // Select again the starting obj
+    select -r $sel;
+}
+
+/* How to call the procedure:
+    ME_randomDuplicateSelection(`ls -sl`, 100, 10) */
